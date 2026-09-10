@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+#Dataset:
+AnonymizedFidelity.csv
+AnonymizedFidelity.zip
