@@ -15,5 +15,6 @@ loader.printfirst(5)
 print("INFO")
 print(loader.info())
 
+preprocessor = Preprocessor(data)
 data : pd.DataFrame = preprocessor.dropcol()
 
