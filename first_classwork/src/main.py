@@ -1,6 +1,7 @@
 import pandas as pd
 from dataloader import DataLoader
 from preprocessing import Preprocessor
+from frequencyAnalisys import FrequencyAnalyzer
 
 link = "./AnonymizedFidelity.csv"
 loader = DataLoader(link)
@@ -16,5 +17,11 @@ print("INFO")
 print(loader.info())
 
 preprocessor = Preprocessor(data)
-data : pd.DataFrame = preprocessor.dropcol()
+data : pd.DataFrame = preprocessor.dropcol().removeshoppers()
 
+
+frequencyanalyzer = FrequencyAnalyzer(data)
+frequencyanalyzer.analyzelevels()
+
+def getdataset(self):
+        return self.dataset

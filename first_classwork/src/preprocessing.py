@@ -13,4 +13,12 @@ class Preprocessor:
 
         self.dataset = self.dataset.drop(columns=toDrop)
         return self
+
+    def removeshoppers(self):
+        self.dataset = self.dataset[self.dataset['descr_liv4'].str.lower() != 'shoppers']
+        return self
+
+
+    def getdataset(self):
+        return self.dataset
     
