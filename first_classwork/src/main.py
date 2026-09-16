@@ -17,7 +17,7 @@ print("INFO")
 print(loader.info())
 
 preprocessor = Preprocessor(data)
-data : pd.DataFrame = preprocessor.dropcol().removeshoppers()
+data : pd.DataFrame = preprocessor.removeshoppers().dropcol().convertdatetime().createslices().getdataset()
 
 
 frequencyanalyzer = FrequencyAnalyzer(data)
