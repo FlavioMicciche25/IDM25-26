@@ -48,5 +48,22 @@ class FrequencyAnalyzer:
         title2 = f"Top 5 least frequent elements "
         self.analyze(title1,title2)
 
+    def stratifiedlevels(self):
+        month_range = ['RANGE 1','RANGE 2','RANGE 3']
+        for r in month_range:
+            subset = self.database[self.database['fascia_mese'] == r]
+            title1 = f"Top 5 most frequent elements - {r} "
+            title2 = f"Top 5 least frequent elements - {r}"
+            fa = FrequencyAnalyzer(subset)
+            fa.analyze(title1,title2)
+
+
+        time_slot = ['SLOT 1','SLOT 2','SLOT 3']
+        for s in time_slot:
+            subset = self.database[self.database['fascia_oraria'] == s]
+            title1 = f"Top 5 most frequent elements - {s} "
+            title2 = f"Top 5 least frequent elements - {s}"
+            fa = FrequencyAnalyzer(subset)
+            fa.analyze(title1,title2)
 
 

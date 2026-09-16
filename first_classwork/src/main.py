@@ -22,6 +22,7 @@ data : pd.DataFrame = preprocessor.dropcol().removeshoppers()
 
 frequencyanalyzer = FrequencyAnalyzer(data)
 frequencyanalyzer.analyzelevels()
+frequencyanalyzer.stratifiedlevels()
 
 def getdataset(self):
         return self.dataset
