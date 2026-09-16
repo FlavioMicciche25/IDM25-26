@@ -18,6 +18,14 @@ class Preprocessor:
         self.dataset = self.dataset[self.dataset['descr_liv4'].str.lower() != 'shoppers']
         return self
 
+    def convertdatetime(self):
+        self.dataset.dropna(subset=['data','ora'], inplace=True)
+
+
+        self.dataset['data'] = pd.to_datetime(self.dataset['data'])
+        self.dataset['ora'] = pd.to_datetime(self.dataset['ora']+ ":00", format="%H:%M:%S").dt.time
+        return self
+
     @staticmethod
     def monthtorange(m,d):
         if m < 5:
