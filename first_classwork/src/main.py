@@ -23,6 +23,3 @@ data : pd.DataFrame = preprocessor.removeshoppers().dropcol().convertdatetime().
 frequencyanalyzer = FrequencyAnalyzer(data)
 frequencyanalyzer.analyzelevels()
 frequencyanalyzer.stratifiedlevels()
-
-def getdataset(self):
-        return self.dataset
