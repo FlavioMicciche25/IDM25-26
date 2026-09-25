@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 class DataLoader:
 
@@ -7,7 +8,7 @@ class DataLoader:
         self.sheets = None
 
     def load(self):
-        self.dataset = pd.read_excel(self.path, sheet_name=None, header = 1)
+        self.sheets = pd.read_excel(self.path, sheet_name=None, header = 1)
         print("Fogli caricati: {list(self.sheets.keys())}")
         return self.sheets
 
