@@ -22,3 +22,22 @@ for name in dfnames:
     preproc = Preprocessor(datasets[name])
     datasets[name] = preproc.rmrows()
     datasets[name] = preproc.rmcolumns(cols=coltorm)
+    datasets[name] = preproc.encode(["Sesso"])
+
+dflist = []
+for name, df in datasets.items():
+    dfc = df.copy()
+    dfc["class"] = name
+    dflist.append(dfc)
+
+dfconcatenated = pd.concat(dflist, ignore_index=True)
+
+dfconcatenated = dfconcatenated.dropna()
+
+X = dfconcatenated.drop(columns=['class'])
+y = dfconcatenated['class']
+
+pca = PCAVisualizer(2)
+Xpca = pca.reduce(X)
+pca.plot(Xpca,y)
+print(f"Explained variance ratio: {pca.explainvariance()}")

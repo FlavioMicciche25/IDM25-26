@@ -12,3 +12,9 @@ class Preprocessor:
     def rmrows(self):
         self.dataset = self.dataset[self.dataset['Età equivalente'] >= 12]
         return self.dataset
+
+    def encode(self, cols):
+        for col in cols:
+            if col in self.dataset.columns:
+                self.dataset[col] = self.dataset[col].map({'F': 0, 'M': 1})
+        return self.dataset
