@@ -1,6 +1,8 @@
 import pandas as pd
 from dataloader import DataLoader
 from preprocessing import Preprocessor
+from pcavisualizer import PCAVisualizer
+from preprocessing import splitdata
 
 loader = DataLoader("./Dataset DAES.xlsx")
 loader.load()
@@ -43,3 +45,7 @@ pca.plot(Xpca,y)
 print(f"Explained variance ratio: {pca.explainvariance()}")
 
 Xtrain, Xtest, ytrain, ytest = splitdata(X=X,y=y)
+
+
+#train such models based on the dataset to search if a model predicts if a new patient is ASD,GDD or Controll
+# (by using 5-cross validation)
