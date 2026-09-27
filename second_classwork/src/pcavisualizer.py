@@ -1,6 +1,6 @@
 import pandas as pd
 import seaborn as sns
-import matplotlib as plt
+from matplotlib import pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -37,6 +37,7 @@ class PCAVisualizer:
         plt.ylabel("PC2", fontsize=12) 
         plt.tight_layout() 
         plt.show()
+        #plt.savefig("pca_plot.png")
 
     def explainvariance(self):
         return self.pca.explained_variance_ratio_
