@@ -57,3 +57,6 @@ AnonymizedFidelity.csv
 AnonymizedFidelity.zip
 main.ipynb
 Dataset DAES.xlsx
+
+#SCATTERPLOT
+*.png
