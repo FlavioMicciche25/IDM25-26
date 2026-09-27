@@ -3,6 +3,7 @@ from dataloader import DataLoader
 from preprocessing import Preprocessor
 from pcavisualizer import PCAVisualizer
 from preprocessing import splitdata
+from classification_models import Model
 
 loader = DataLoader("./Dataset DAES.xlsx")
 loader.load()
@@ -26,6 +27,8 @@ for name in dfnames:
     datasets[name] = preproc.rmcolumns(cols=coltorm)
     datasets[name] = preproc.encode(["Sesso"])
 
+
+#PREPARING FOR CLASSIFICATION
 dflist = []
 for name, df in datasets.items():
     dfc = df.copy()
@@ -46,6 +49,20 @@ print(f"Explained variance ratio: {pca.explainvariance()}")
 
 Xtrain, Xtest, ytrain, ytest = splitdata(X=X,y=y)
 
+#CLASSIFICATION AND MODELS VALIDATION
+models = ["decisiontree", "randomforest", "svc", "knn"]
+result = {}
+print()
 
-#train such models based on the dataset to search if a model predicts if a new patient is ASD,GDD or Controll
-# (by using 5-cross validation)
+for name in models:
+    trainer = Model(name)
+    trainer.train(Xtrain,ytrain)
+
+
+    accuracy = trainer.evaluate(Xtest,ytest)
+    result[name] = accuracy
+
+    print(f"{name}")
+    print("Best params:", trainer.bestparams())
+    print("Test accuracy:", accuracy)
+    print()
