@@ -8,6 +8,7 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, AdaBoostClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.calibration import CalibratedClassifierCV
 
 
 class Model:
@@ -119,7 +120,10 @@ def bagging_knn(Xtrain, ytrain, Xtest, ytest):
 
 def bagging_svc(Xtrain, ytrain, Xtest, ytest):
     bagg = BaggingClassifier(
-        estimator= SVC(C=1, kernel= "rbf", probability=True),
+        estimator = CalibratedClassifierCV(
+            SVC(C=1, kernel= "rbf"),
+            ensemble=False
+        ),
         n_estimators= 10,
         max_samples= 0.8,
         random_state= 42
