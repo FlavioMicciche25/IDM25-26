@@ -73,18 +73,3 @@ class DataLoader:
 
         print(" INFO",df.info())
         return self
-
-    def merge(self, key="PatientID"):
-        
-        if self.patients is None or self.fitbit_daily is None:
-            raise RuntimeError("before you merge them, first upload both datasets with load() method.")
-
-        if key not in self.patients.columns:
-            raise ValueError(f"Key '{key}' not found in patients.")
-
-        if key not in self.fitbit_daily.columns:
-            raise ValueError(f"Key '{key}' not found in fitbit_daily.")
-
-        merged = self.fitbit_daily.merge(self.patients, on=key, how="left")
-        print("Merge completed.\n===== UNIFIED FITBIT DATASET HEADER =====")
-        return merged
