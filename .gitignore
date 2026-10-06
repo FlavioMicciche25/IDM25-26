@@ -20,6 +20,7 @@ cover/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
@@ -55,7 +56,6 @@ tempCodeRunnerFile.py
 # Dataset:
 AnonymizedFidelity.csv
 AnonymizedFidelity.zip
-main.ipynb
 Dataset DAES.xlsx
 data/
 
