@@ -5,6 +5,7 @@ from preprocessing import splitdata
 from pcavisualizer import PCAVisualizer
 from classificationmodels import Model
 from classificationmodels import bagging_decisiontree, boosting_decisiontree, bagging_knn, bagging_svc
+from evaluation import Evaluator
 
 
 # LOAD DATASETS
@@ -78,29 +79,39 @@ Xtrain, Xtest, ytrain, ytest = splitdata(X=X,y=y)
 
 models = ["decisiontree", "randomforest", "svc", "knn"]
 result = {}
+trained_models={}
+
 print()
 
 for name in models:
     trainer = Model(name)
     trainer.train(Xtrain,ytrain)
 
-
     accuracy = trainer.evaluate(Xtest,ytest)
     result[name] = accuracy
+    trained_models[name] = trainer.get_model()
 
     print(f"{name}")
     print("Best params:", trainer.bestparams())
     print("Test accuracy:", accuracy)
     print()
 
-bagg_accuracy = bagging_decisiontree(Xtrain, ytrain, Xtest, ytest)
-print(f"Bagging Decision Tree accuracy: {bagg_accuracy}")
+bag_dt, bag_dt_acc = bagging_decisiontree(Xtrain, ytrain, Xtest, ytest)
+trained_models["bagging_decisiontree"] = bag_dt
+result["bagging_decisiontree"] = bag_dt_acc
+print(f"Bagging Decision Tree accuracy: {result["bagging_decisiontree"]}")
 
-boost_accuracy = boosting_decisiontree(Xtrain, ytrain, Xtest, ytest)
-print(f"Boosting Decision Tree accuracy: {boost_accuracy}")
+boost_dt, boost_dt_acc = boosting_decisiontree(Xtrain, ytrain, Xtest, ytest)
+trained_models["boosting_decisiontree"] = boost_dt
+result["boosting_decisiontree"] = boost_dt_acc
+print(f"Boosting Decision Tree accuracy: {result["boosting_decisiontree"]}")
 
-bagg_accuracy = bagging_knn(Xtrain, ytrain, Xtest, ytest)
-print(f"Bagging K-NN accuracy: {bagg_accuracy}")
+bag_knn, bag_knn_acc = bagging_knn(Xtrain, ytrain, Xtest, ytest)
+trained_models["bagging_knn"] = bag_knn
+result["bagging_knn"] = bag_knn_acc
+print(f"Bagging K-NN accuracy: {result["bagging_knn"]}")
 
-bagg_accuracy = bagging_svc(Xtrain, ytrain, Xtest, ytest)
-print(f"Bagging SVC accuracy: {bagg_accuracy}")
+bag_svc, bag_svc_acc = bagging_svc(Xtrain, ytrain, Xtest, ytest)
+trained_models["bagging_svc"] = bag_svc
+result["bagging_svc"] = bag_svc_acc
+print(f"Bagging SVC accuracy: {result["bagging_svc"]}")

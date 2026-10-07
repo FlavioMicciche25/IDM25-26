@@ -87,6 +87,9 @@ class Model:
     def bestparams(self):
         return self.grid.best_params_
 
+    def get_model(self):
+        return self.grid.best_estimator_
+
 
 def bagging_decisiontree(Xtrain, ytrain, Xtest, ytest):
     bagg = BaggingClassifier(
@@ -97,7 +100,8 @@ def bagging_decisiontree(Xtrain, ytrain, Xtest, ytest):
         random_state=42
     )
     bagg.fit(Xtrain,ytrain)
-    return bagg.score(Xtest,ytest)
+    acc = bagg.score(Xtest, ytest)
+    return bagg, acc
 
 def boosting_decisiontree(Xtrain, ytrain, Xtest, ytest):
     ada = AdaBoostClassifier(
@@ -107,7 +111,8 @@ def boosting_decisiontree(Xtrain, ytrain, Xtest, ytest):
         random_state=42
     )
     ada.fit(Xtrain,ytrain)
-    return ada.score(Xtest,ytest)
+    acc = ada.score(Xtest,ytest)
+    return ada, acc
 
 def bagging_knn(Xtrain, ytrain, Xtest, ytest):
     bagg = BaggingClassifier(
@@ -117,7 +122,8 @@ def bagging_knn(Xtrain, ytrain, Xtest, ytest):
         random_state = 42 
     )
     bagg.fit(Xtrain,ytrain)
-    return bagg.score(Xtest, ytest)
+    acc = bagg.score(Xtest, ytest)
+    return bagg, acc
 
 def bagging_svc(Xtrain, ytrain, Xtest, ytest):
     bagg = BaggingClassifier(
@@ -130,4 +136,5 @@ def bagging_svc(Xtrain, ytrain, Xtest, ytest):
         random_state= 42
     )
     bagg.fit(Xtrain,ytrain)
-    return bagg.score(Xtest, ytest)
+    acc = bagg.score(Xtest, ytest)
+    return bagg, acc
