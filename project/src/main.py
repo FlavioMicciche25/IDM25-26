@@ -4,6 +4,7 @@ from preprocessing import Preprocessor
 from preprocessing import splitdata
 from pcavisualizer import PCAVisualizer
 from classificationmodels import Model
+from classificationmodels import bagging_decisiontree, boosting_decisiontree, bagging_knn, bagging_svc
 
 
 # LOAD DATASETS
@@ -91,3 +92,15 @@ for name in models:
     print("Best params:", trainer.bestparams())
     print("Test accuracy:", accuracy)
     print()
+
+bagg_accuracy = bagging_decisiontree(Xtrain, ytrain, Xtest, ytest)
+print(f"Bagging Decision Tree accuracy: {bagg_accuracy}")
+
+boost_accuracy = boosting_decisiontree(Xtrain, ytrain, Xtest, ytest)
+print(f"Boosting Decision Tree accuracy: {boost_accuracy}")
+
+bagg_accuracy = bagging_knn(Xtrain, ytrain, Xtest, ytest)
+print(f"Bagging K-NN accuracy: {bagg_accuracy}")
+
+bagg_accuracy = bagging_svc(Xtrain, ytrain, Xtest, ytest)
+print(f"Bagging SVC accuracy: {bagg_accuracy}")

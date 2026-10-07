@@ -5,7 +5,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, AdaBoostClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.calibration import CalibratedClassifierCV
@@ -86,3 +86,48 @@ class Model:
     
     def bestparams(self):
         return self.grid.best_params_
+
+
+def bagging_decisiontree(Xtrain, ytrain, Xtest, ytest):
+    bagg = BaggingClassifier(
+        estimator=DecisionTreeClassifier(random_state=42),
+        n_estimators=100,
+        max_samples=0.8,
+        max_features=1.0,
+        random_state=42
+    )
+    bagg.fit(Xtrain,ytrain)
+    return bagg.score(Xtest,ytest)
+
+def boosting_decisiontree(Xtrain, ytrain, Xtest, ytest):
+    ada = AdaBoostClassifier(
+        estimator=DecisionTreeClassifier(max_depth=3),
+        n_estimators=100,
+        learning_rate = 0.5,
+        random_state=42
+    )
+    ada.fit(Xtrain,ytrain)
+    return ada.score(Xtest,ytest)
+
+def bagging_knn(Xtrain, ytrain, Xtest, ytest):
+    bagg = BaggingClassifier(
+        estimator= KNeighborsClassifier(n_neighbors=5),
+        n_estimators= 50,
+        max_samples = 0.8,
+        random_state = 42 
+    )
+    bagg.fit(Xtrain,ytrain)
+    return bagg.score(Xtest, ytest)
+
+def bagging_svc(Xtrain, ytrain, Xtest, ytest):
+    bagg = BaggingClassifier(
+        estimator = CalibratedClassifierCV(
+            SVC(C=1, kernel= "rbf"),
+            ensemble=False
+        ),
+        n_estimators= 10,
+        max_samples= 0.8,
+        random_state= 42
+    )
+    bagg.fit(Xtrain,ytrain)
+    return bagg.score(Xtest, ytest)
