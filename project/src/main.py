@@ -3,6 +3,7 @@ from dataloader import DataLoader
 from preprocessing import Preprocessor
 from preprocessing import splitdata
 from pcavisualizer import PCAVisualizer
+from classificationmodels import Model
 
 
 # LOAD DATASETS
@@ -70,3 +71,23 @@ pca = PCAVisualizer(2)
 Xpca = pca.reduce(X)
 pca.plot(Xpca,y)
 print(f"Explained variance ratio: {pca.explainvariance()}")
+
+# TRAINING CLASSIFICATION MODELS AND VALIDATION
+Xtrain, Xtest, ytrain, ytest = splitdata(X=X,y=y)
+
+models = ["decisiontree", "randomforest", "svc", "knn"]
+result = {}
+print()
+
+for name in models:
+    trainer = Model(name)
+    trainer.train(Xtrain,ytrain)
+
+
+    accuracy = trainer.evaluate(Xtest,ytest)
+    result[name] = accuracy
+
+    print(f"{name}")
+    print("Best params:", trainer.bestparams())
+    print("Test accuracy:", accuracy)
+    print()
