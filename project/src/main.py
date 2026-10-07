@@ -2,6 +2,8 @@ import pandas as pd
 from dataloader import DataLoader
 from preprocessing import Preprocessor
 from preprocessing import splitdata
+from pcavisualizer import PCAVisualizer
+
 
 # LOAD DATASETS
 loader = DataLoader(
@@ -14,7 +16,7 @@ loader.load()
 loader.printhead(loader.patients_path).printhead(loader.fitbit_path)
 loader.printinfo(loader.patients_path).printinfo(loader.fitbit_path)
 
-# CLEANING, MERGING AND DATASETS
+# CLEANING, MERGING AND SPLITTING DATASETS
 df_pat = loader.get_patients()
 df_fit = loader.get_fitbit()
 
@@ -59,6 +61,12 @@ df_final = preproc.merge()
 print(df_final.head())
 print(df_final.info())
 
-X = df_final.drop(columns=["GruppoLabel"])
+X = df_final.drop(columns=["PatientID", "Day","GruppoLabel"])
 y = df_final["GruppoLabel"]
 X_train, X_test, y_train, y_test = splitdata(X, y)
+
+# VISUALIZE PCA SCATTERPLOT AND VARIANCE RATIO
+pca = PCAVisualizer(2)
+Xpca = pca.reduce(X)
+pca.plot(Xpca,y)
+print(f"Explained variance ratio: {pca.explainvariance()}")
