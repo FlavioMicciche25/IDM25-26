@@ -6,6 +6,7 @@ from pcavisualizer import PCAVisualizer
 from classificationmodels import Model
 from classificationmodels import bagging_decisiontree, boosting_decisiontree, bagging_knn, bagging_svc
 from evaluation import Evaluator
+from evaluation import plot_roc_two_models
 
 
 # LOAD DATASETS
@@ -115,3 +116,7 @@ bag_svc, bag_svc_acc = bagging_svc(Xtrain, ytrain, Xtest, ytest)
 trained_models["bagging_svc"] = bag_svc
 result["bagging_svc"] = bag_svc_acc
 print(f"Bagging SVC accuracy: {result["bagging_svc"]}")
+
+Evaluator(trained_models["randomforest"], Xtest, ytest).report().confusion()
+Evaluator(trained_models["bagging_decisiontree"], Xtest, ytest).report().confusion()
+plot_roc_two_models(trained_models["randomforest"], trained_models["bagging_decisiontree"], Xtest, ytest)
