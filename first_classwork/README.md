@@ -3,25 +3,21 @@
 ## First classwork - Data Mining Introduction
 ---
 
+## Descrizione del progetto
+
 Il dataset impiegato per l'analisi è AnonymizedFidelity, ossia un insieme di dati che si riferisce agli articoli acquistati in un supermercato. L'obiettivo è l'analisi su più livelli:
 
-**- analisi delle frequenze;**
-
-**- stratificazione temporale;**
-
-**- estrazione di regole di associazione;**
-
-**- clustering su dati la cui dimensionalità è stata ridotta.**
+- **analisi delle frequenze;**
+- **stratificazione temporale;**
+- **estrazione di regole di associazione;**
+- **clustering su dati la cui dimensionalità è stata ridotta.**
 
 I prodotti sono stati organizzati in una gerarchia composta da quattro livelli:
 
-**- Livello 1: macro-categorie(descr_liv1)**
-
-**- Livello 2: sotto-categorie(descr_liv2)**
-
-**- Livello 3: categorie specifiche(descr_liv3)**
-
-**- Livello 4: categorie nel dettaglio(descr_liv4)**
+- **Livello 1: macro-categorie(descr_liv1)**
+- **Livello 2: sotto-categorie(descr_liv2)**
+- **Livello 3: categorie specifiche(descr_liv3)**
+- **Livello 4: categorie nel dettaglio(descr_liv4)**
 
 Durante la stesura del codice, su indicazione del professore, si è seguito un approccio di programmazione orientata agli oggetti. In particolare il file main si occupa di istanziare gli oggetti e di richiamarne i relativi **metodi**, mentre in ciascun file è contenuta una classe specifica.
 
@@ -102,3 +98,13 @@ Seguendo l'ordine di utilizzo delle varie classi descriviamo i file e il loro co
         - selezionato automaticamente tramite **elbow**,
         - selezionato automaticamente tramite **silhouette**,
         - oppure impostato manualmente tramite il parametro **k**.
+
+---
+
+## Requisiti
+
+Per eseguire il progetto è consigliato utilizzare un ambiente virtuale e installare le dipendenze presenti nel file `requirements.txt`.
+
+```bash
+pip install -r requirements.txt
+```
