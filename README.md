@@ -48,14 +48,13 @@ Tutti i lavori seguono un approccio **object-oriented**, con `main.py` come orch
 
 ## Progetto – Analisi dei dati Fitbit e classificazione dei gruppi clinici
 
-**Dataset:** Fitbit Daily Activity + informazioni cliniche dei pazienti.
+**Dataset:** Fitbit Daily + metadati dei pazienti.
 
 **Workflow:**
 
 - caricamento e integrazione dei dataset tramite identificativo del paziente;
 - preprocessing dei dati e gestione dei valori mancanti;
-- analisi esplorativa delle variabili relative a sonno e attività fisica;
-- visualizzazione dei dati tramite **PCA**;
+- visualizzazione dei dati tramite **PCA a due componenti**;
 - addestramento e confronto di modelli di classificazione:
   - Decision Tree;
   - Random Forest;
@@ -68,7 +67,11 @@ Tutti i lavori seguono un approccio **object-oriented**, con `main.py` come orch
   - Confusion Matrix;
   - ROC Curve e AUC;
 - confronto tra modelli base e tecniche di **Ensemble Learning**.
-
 ---
+### **Requisiti**
 
-Panoramica generale dei contenuti del corso e delle principali tecniche di **Data Mining**, **Machine Learning** e **Data Analysis** affrontate durante le attività didattiche.
+Per eseuire il progetto è necessario installare, preferibilmente in ambiente virtuale, le librerie presenti in 'requirements.txt':
+
+```bash
+pip install -r requirements.txt
+```
