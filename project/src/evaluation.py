@@ -11,8 +11,6 @@ from sklearn.metrics import (
 from sklearn.preprocessing import label_binarize
 
 
-
-
 class Evaluator:
     def __init__(self, model, Xtest, ytest):
         self.model = model
@@ -47,21 +45,18 @@ def plot_roc_two_models(model1, model2, Xtest, ytest, labels=None):
     if labels is None:
         labels = sorted(set(ytest))
 
-    # Binarizzazione delle classi
     y_bin = label_binarize(ytest, classes=labels)
 
-    # Probabilità dei modelli
     y_proba1 = model1.predict_proba(Xtest)
     y_proba2 = model2.predict_proba(Xtest)
 
-    # ROC micro-average
     fpr1, tpr1, _ = roc_curve(y_bin.ravel(), y_proba1.ravel())
     fpr2, tpr2, _ = roc_curve(y_bin.ravel(), y_proba2.ravel())
 
     auc1 = auc(fpr1, tpr1)
     auc2 = auc(fpr2, tpr2)
 
-    # Plot
+    print("\n=== BEST MODELS ROC CURVE COMPARISON ===")
     plt.figure(figsize=(8,6))
     plt.plot(fpr1, tpr1, label=f"Model 1 (AUC = {auc1:.3f})", linewidth=2)
     plt.plot(fpr2, tpr2, label=f"Model 2 (AUC = {auc2:.3f})", linewidth=2)

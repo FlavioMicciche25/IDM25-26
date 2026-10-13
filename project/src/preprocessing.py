@@ -1,69 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-"""
-# OLD VERSION
-class Preprocessor:
-
-    def __init__(self):
-        pass
-
-    def preprocess_patients(self, df):
-        
-        # Rimozione colonne ridondanti
-        cols_to_drop = [
-            "ObjectId", "Centro", "Sede", 
-            "PatologiaPrincipale", "Gruppo"
-        ]
-        df = df.drop(columns=[c for c in cols_to_drop if c in df.columns])
-
-        # Encoding sesso
-        if "Sesso" in df.columns:
-            df["Sesso"] = df["Sesso"].map({'female': 0, 'male': 1})
-
-        # DataNascita → Età
-        if "DataNascita" in df.columns:
-            df["Età"] = pd.to_datetime("today").year - pd.to_datetime(df["DataNascita"]).dt.year
-            df = df.drop(columns=["DataNascita"])
-
-        return df
-
-    def preprocess_fitbit(self, df):
-
-        # Colonne da rimuovere (ridondanti o >50% NaN)
-        cols_to_drop = [
-            "TimeInBed", "AsleepMinutes",
-            "LightSleepCounts", "DeepSleepCounts", "REMSleepCounts",
-            "AwakeCounts", "AsleepCounts",
-            "LightSleepBreathingRate", "DeepSleepBreathingRate", "REMSleepBreathingRate"
-        ]
-        df = df.drop(columns=[c for c in cols_to_drop if c in df.columns])
-
-        # Imputazione NaN fisiologici → 0
-        zero_impute_cols = [
-            "MinutesAfterWakeup", "MinutesToFallAsleep", "SleepEfficiency",
-            "LightSleepMinutes", "DeepSleepMinutes", "REMSleepMinutes",
-            "AwakeMinutes"
-        ]
-        for col in zero_impute_cols:
-            if col in df.columns:
-                df[col] = df[col].fillna(0)
-
-        # Imputazione NaN non fisiologici → mediana
-        median_impute_cols = [
-            "Calories", "ActivityCalories", "RestingHeartRate",
-            "VO2Max", "NightlySkinTemperature", "BreathingRate",
-            "FullSleepBreathingRate",
-            "BelowFatBurnCalories", "FatBurnCalories", "CardioCalories", "PeakCalories",
-            "BelowFatBurnMinutes", "FatBurnMinutes", "CardioMinutes", "PeakMinutes"
-        ]
-        for col in median_impute_cols:
-            if col in df.columns:
-                df[col] = df[col].fillna(df[col].median())
-
-        return df
-
-"""
 
 class Preprocessor:
     def __init__(self, df_pat=None, df_fit=None):
