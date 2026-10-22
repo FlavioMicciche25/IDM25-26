@@ -70,16 +70,6 @@ class Model:
             n_jobs=-1
         )
         self.grid.fit(Xtrain, ytrain)
-
-    def train(self, Xtrain, ytrain):
-        self.grid = GridSearchCV(
-            self.pipeline,
-            self.paramgrid,
-            cv = 5,
-            scoring="accuracy",
-            n_jobs=-1
-        )
-        self.grid.fit(Xtrain, ytrain)
     
     def evaluate(self, Xtest, ytest):
         return self.grid.score(Xtest,ytest)
